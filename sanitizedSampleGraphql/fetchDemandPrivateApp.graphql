@@ -1,0 +1,124 @@
+# General Description:
+# - This query, fetchDemandPrivateApp, retrieves the most recent banana orders from our database.
+# - It fetches only a selected subset of properties (from 200+ available) for demonstration purposes.
+# - The retrieved data is used to populate a table in Retool, which is created by our JavaScript code.
+#
+# Technical Description:
+# - The query accepts variables for pagination ($cursor, $pageSize) and filtering ($state, $customerStates, $sellerStates).
+# - It returns nested objects including details such as banana order info, customer data, attachments (bunches), cash register info, etc.
+# - This data is further processed to trigger actions like OpenAI summarization.
+#
+# Note: The actual table in Retool is created via the JavaScript logic, not by this query.
+
+query fetchBananaOrders(
+  $cursor: String
+  $state: BananaOrderState
+  $pageSize: Int = 10  # Default page size if none is provided
+  $customerStates: [BananaCustomerState]
+  $sellerStates: [BananaSellerState]
+) {
+  bananaOrders(
+    after: $cursor
+    state: $state
+    first: $pageSize
+  ) {
+    pageInfo {
+      hasNextPage
+    }
+    edges {
+      cursor
+      node {
+        peeled
+        bunches {
+          id
+          bananaUrl
+          supplier {
+            id
+            contactEmail {
+              address
+            }
+          }
+          pickedAt
+          hideFromSellers
+        }
+        cashRegister {
+          id
+          __typename
+          orderState
+        }
+        bananaCustomer(banana_id: "demo_banana_id") {
+          id
+          banana_id {
+            id
+            bananaProfileUrl
+          }
+          orderState
+          lastPeelChange
+          contactEmail
+        }
+        returnReason
+        farmsToAvoid
+        farmsToSource
+        tasteTests {
+          id
+          orderState
+          startsAt
+        }
+        pickedAt
+        harvester {
+          id
+          name
+          contactEmail {
+            address
+          }
+        }
+        bananaDescription
+        bananaDisclosure
+        bananaOrderType
+        expectedDeliveryTime
+        varietyFocus
+        bunchDescription
+        orderUrl
+        id
+        peelingInstructions
+        orderScope
+        bananaName
+        farmLocation
+        accessRights
+        contactPhone
+        wholeseller {
+          id
+          wholesellerName
+        }
+        publicBunchName
+        publicOrderUrl
+        bananaQualifications {
+          id
+          responseType
+          required
+        }
+        bananaQuestions {
+          id
+          responseType
+          required
+        }
+        bananaRegions {
+          countryCode
+          name
+        }
+        bananaSectors {
+          id
+          name
+        }
+        orderSlug
+        orderState
+        orderStats {
+          customerCount(states: $customerStates, sellerStates: $sellerStates)
+        }
+        bananaTags
+        peelingTime
+        pendingPayment
+      }
+    }
+  }
+}
