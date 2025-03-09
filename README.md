@@ -1,10 +1,10 @@
 # retool-complex-demand-analyzer
 
-This solution is composed of a Retool internal App that helps teams quickly understand complex client demands and speeds up response times—from an average of 80 minutes per demand to 15 minutes.
+This is a demo repository with a segment of a solution composed of a Retool internal App that helps teams quickly understand complex client demands and speeds up response times—from an average of 80 minutes per demand to 15 minutes.
 
-## Address
+## Objective
 
-This is a private project, but you can understand its operational impact by reviewing the OnFrontiers product ([onfrontiers.com](https://www.onfrontiers.com/product)) and a few code samples of the solution in the summary below.
+Although this project is private, the demo code samples clearly illustrate its simplicity and show how easily the solution can be replicated by anyone with access to Retool and the OpenAI API.
 
 ## **Brief Context**
 
