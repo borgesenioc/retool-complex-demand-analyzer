@@ -1,8 +1,14 @@
-# This demo query has been sanitized for a banana-selling business.
-# The objective of this query is to extract the most recent bananaOrders received into a table.
-# There are 200+ properties in the original table, but we only want the most relevant properties for this process at display
-# That table is stored in Retool and triggers requests to OpenAI for complex demand summarization
-# Internal teams usually focus on the most recent 1 or 2 bananaOrders, but having 10 at display helps management teams check accuracy of the output for the most recent order
+# General Description:
+# - This query, fetchDemandPrivateApp, retrieves the most recent banana orders from our database.
+# - It fetches only a selected subset of properties (from 200+ available) for demonstration purposes.
+# - The retrieved data is used to populate a table in Retool, which is created by our JavaScript code.
+#
+# Technical Description:
+# - The query accepts variables for pagination ($cursor, $pageSize) and filtering ($state, $customerStates, $sellerStates).
+# - It returns nested objects including details such as banana order info, customer data, attachments (bunches), cash register info, etc.
+# - This data is further processed to trigger actions like OpenAI summarization.
+#
+# Note: The actual table in Retool is created via the JavaScript logic, not by this query.
 
 query fetchBananaOrders(
   $cursor: String
