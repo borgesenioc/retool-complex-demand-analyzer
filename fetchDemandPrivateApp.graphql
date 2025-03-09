@@ -1,0 +1,118 @@
+# This demo query has been sanitized for a banana-selling business.
+# The objective of this query is to extract the most recent bananaOrders received into a table.
+# There are 200+ properties in the original table, but we only want the most relevant properties for this process at display
+# That table is stored in Retool and triggers requests to OpenAI for complex demand summarization
+# Internal teams usually focus on the most recent 1 or 2 bananaOrders, but having 10 at display helps management teams check accuracy of the output for the most recent order
+
+query fetchBananaOrders(
+  $cursor: String
+  $state: BananaOrderState
+  $pageSize: Int = 10  # Default page size if none is provided
+  $customerStates: [BananaCustomerState]
+  $sellerStates: [BananaSellerState]
+) {
+  bananaOrders(
+    after: $cursor
+    state: $state
+    first: $pageSize
+  ) {
+    pageInfo {
+      hasNextPage
+    }
+    edges {
+      cursor
+      node {
+        peeled
+        bunches {
+          id
+          bananaUrl
+          supplier {
+            id
+            contactEmail {
+              address
+            }
+          }
+          pickedAt
+          hideFromSellers
+        }
+        cashRegister {
+          id
+          __typename
+          orderState
+        }
+        bananaCustomer(banana_id: "demo_banana_id") {
+          id
+          banana_id {
+            id
+            bananaProfileUrl
+          }
+          orderState
+          lastPeelChange
+          contactEmail
+        }
+        returnReason
+        farmsToAvoid
+        farmsToSource
+        tasteTests {
+          id
+          orderState
+          startsAt
+        }
+        pickedAt
+        harvester {
+          id
+          name
+          contactEmail {
+            address
+          }
+        }
+        bananaDescription
+        bananaDisclosure
+        bananaOrderType
+        expectedDeliveryTime
+        varietyFocus
+        bunchDescription
+        orderUrl
+        id
+        peelingInstructions
+        orderScope
+        bananaName
+        farmLocation
+        accessRights
+        contactPhone
+        wholeseller {
+          id
+          wholesellerName
+        }
+        publicBunchName
+        publicOrderUrl
+        bananaQualifications {
+          id
+          responseType
+          required
+        }
+        bananaQuestions {
+          id
+          responseType
+          required
+        }
+        bananaRegions {
+          countryCode
+          name
+        }
+        bananaSectors {
+          id
+          name
+        }
+        orderSlug
+        orderState
+        orderStats {
+          customerCount(states: $customerStates, sellerStates: $sellerStates)
+        }
+        bananaTags
+        peelingTime
+        pendingPayment
+      }
+    }
+  }
+}

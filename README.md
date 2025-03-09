@@ -45,20 +45,5 @@ flowchart TB
 
 ## **Building Blocks**
 
-- [x]  Complete
-- [x]  Complete
-- [x]  Complete
-- [x]  Complete
-- [x]  Complete
-- [x]  Complete
-- [x]  Complete
-- [x]  Complete
-- [x]  Complete
-- [x]  Complete
-- [x]  Complete
-- [x]  Complete
-- [x]  Complete
-- [x]  Complete
-
 ### **Check all my projects**
 
