@@ -28,7 +28,7 @@ flowchart TB
     F --> G[7 - Internal user reviews<br>and can request revision]
     G --> H[8 - Feedback + demand<br>sent back to OpenAI]
     H --> I[9 - Approved data<br>saved to private app]
-    ```
+```
 
 ## **Folder Structure**
 ```
